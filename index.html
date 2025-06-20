@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Madhurendra Kumar (M14r41) - Red Team Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #1f2937;       /* Dark slate gray */
+      --color-secondary: #3b82f6;     /* Blue-500 */
+      --color-accent: #ea1f1f;        /* Red-500 for emphasis */
+      --color-text: #e5e7eb;          /* Gray-200 */
+      --color-bg-card: rgba(31, 41, 55, 0.85);
+      --color-bg-overlay: rgba(31, 41, 55, 0.95);
+      --font-family: 'Poppins', sans-serif;
+      --border-radius: 16px;
+      --transition: 0.3s ease;
+    }
+
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+      background-size: 400% 400%;
+      animation: bgGradient 30s ease infinite;
+      font-family: var(--font-family);
+      color: var(--color-text);
+    }
+
+    @keyframes bgGradient {
+      0%, 100% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--color-bg-overlay);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      user-select: none;
+      backdrop-filter: saturate(180%) blur(10px);
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--color-accent);
+      letter-spacing: 4px;
+      cursor: default;
+      position: relative;
+      transition: color var(--transition);
+      text-shadow: 0 0 6px var(--color-accent-light);
+    }
+    nav .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
+      animation: shine 3s linear infinite;
+      border-radius: 3px;
+      filter: drop-shadow(0 0 2px var(--color-accent-light));
+    }
+    @keyframes shine {
+      0% {transform: translateX(-100%);}
+      100% {transform: translateX(100%);}
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 3rem;
+    }
+
+    nav ul li a {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 0.25rem 0;
+      position: relative;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: var(--color-accent);
+      border-radius: 3px;
+      transition: width var(--transition), left var(--transition);
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: var(--color-accent);
+      outline: none;
+    }
+    nav ul li a:hover::after,
+    nav ul li a:focus::after {
+      width: 100%;
+      left: 0;
+      box-shadow: 0 0 10px var(--color-accent);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 6rem auto 4rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      animation: fadeInScale 1s ease forwards;
+    }
+
+    header h1 {
+        font-size: 3.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.6rem; /* Reduced from 1rem */
+        text-shadow: 0 0 15px var(--color-accent-light);
+        user-select: text;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: text;
+      letter-spacing: 0.02em;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-bg-overlay);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.5);
+      transition: background-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+      user-select: none;
+      will-change: transform;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: var(--color-secondary);
+      color: var(--color-text);
+      box-shadow: 0 14px 40px rgba(59, 130, 246, 0.7);
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    section {
+      margin-top: 4rem;
+      background: var(--color-bg-card);
+      padding: 2.8rem 3rem;
+      border-radius: var(--border-radius);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      text-align: left;
+      animation: fadeInUp 1s ease forwards;
+      user-select: text;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #d1d5db;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem; /* Reduced from 1.6rem */
+      color: var(--color-accent);
+      text-shadow: 0 0 10px var(--color-accent-light);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    section p,
+    section ul {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #d1d5db;
+    }
+
+    ul {
+      padding-left: 1.6rem;
+    }
+
+    ul li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1.4rem;
+    }
+    ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    #contact a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      transition: color var(--transition);
+      font-weight: 600;
+    }
+    #contact a:hover,
+    #contact a:focus {
+      color: var(--color-secondary);
+      outline: none;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+      background: var(--color-primary);
+      user-select: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      margin-top: 4rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links.active {
+      display: block;
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      right: 0;
+      background-color: var(--color-bg-overlay);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+      nav ul {
+        gap: 2rem;
+      }
+      header h1 {
+        font-size: 2.8rem;
+      }
+      section {
+        padding: 2rem 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem 1.2rem;
+      }
+      nav ul {
+        width: 100%;
+        justify-content: center;
+        gap: 1.2rem;
+        margin-top: 0.3rem;
+      }
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .container {
+        margin: 5rem auto 3rem;
+        padding: 1.5rem 1rem;
+      }
+      section {
+        max-width: 100%;
+        padding: 1.8rem 1.5rem;
+        border-radius: 12px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" aria-label="Brand logo">M14R41</div>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger" onclick="toggleNav()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" role="navigation" aria-label="Primary Navigation">
+    <li><a href="#about">About</a></li>
+    <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#Certication">Certication</a></li>
+  </ul>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <header>
+    <h1>Madhurendra Kumar</h1>
+    <p>Security Consultant || 50x CVE || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC || Pentester || Offensive Security</p>
+    <a href="/portfolio" class="btn" target="_blank" rel="noopener noreferrer">View Portfolio</a>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Senior Security Consultant, Certified Red Team Professional (CRTP) and CEH Master with over 3 years of experience in Penetration Testing.</p><br>
+
+    <p>My expertise includes Web, API, Mobile, SAST, and Thick Client penetration testing, along with vulnerability research and client communction.</p><br>
+
+    <p>I have 50+ CVEs published under my name and actively contribute to the cybersecurity community through open-source projects and technical blogs.<br/></p><br>
+
+
+
+    </p>
+  </section>
+
+  <section id="offerings">
+    <h2>What I Offer</h2>
+    <ul>
+        <li>Perform Vulnerability Assessments</li>
+        <li>Perform penetration tests on web applications.</li>
+        <li>Conduct penetration tests on APIs.</li>
+        <li>Source code review and analysis.</li>
+        <li>Mobile penetration testing (Android and iOS).</li>
+        <li>Thick client penetration testing.</li>
+        <li>Conduct in-depth security research and document findings.</li>
+        <li>Collaborate with the application team to address vulnerabilities and provide remediation.</li>
+
+
+    </ul>
+    <p>
+        <a href="mailto:madhurendra011@gmail.com" class="btn" rel="noopener noreferrer" aria-label="Email Me for Penetration Testing Services"> Hire Me Now</a>
+    </p>
+  </section>
+
+    <section id="Certication">
+    <h2>Certification</h2>
+    <ul>
+      <li>CRTP (Certified Red Team Professional)</li>
+      <li>CEH Practical</li>
+      <li>CEH_V11</li>
+      <li>CEH Master</li>
+      <li>MCRTA</li>
+    </ul>
+
+  </section>
+
+<section id="contact">
+    <h2>Get in Touch</h2>
+    <p><span class="label">Email   :</span> <a href="mailto:madhurendra011@gmail.com">Write your Email!</a></p>
+    <p><span class="label">GitHub  :</span> <a href="https://github.com/m14r41" target="_blank">github.com/m14r41</a></p>
+    <p><span class="label">Blog    :</span> <a href="https://medium.com/@m14r41" target="_blank">medium.com/@m14r41</a></p>
+    <p><span class="label">LinkedIn:</span> <a href="https://www.linkedin.com/in/M14R41/" target="_blank">linkedin.com/in/M14R41</a></p>
+    <p><span class="label">X       :</span> <a href="https://x.com/M14_R41" target="_blank">x.com/M14_R41</a></p>
+</section>
+
+<style>
+    #contact {
+        text-align: left;
+        padding: 20px;
+    }
+    #contact h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    #contact p {
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+    .label {
+        display: inline-block;
+        width: 100px; /* Adjust as necessary for your layout */
+        font-weight: bold;
+    }
+    #contact a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+    #contact a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+
+</div>
+
+<footer>
+  &copy; 2025 Madhurendra Kumar | M14r41
+</footer>
+
+<script>
+  function toggleNav() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
