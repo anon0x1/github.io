@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Madhurendra Kumar || M14r41 </title>
+  <link href="favicon.ico" type="image/png" rel="icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #1f2937;       /* Dark slate gray */
+      --color-secondary: #3b82f6;     /* Blue-500 */
+      --color-accent: #ea1f1f;        /* Red-500 for emphasis */
+      --color-text: #e5e7eb;          /* Gray-200 */
+      --color-bg-card: rgba(31, 41, 55, 0.85);
+      --color-bg-overlay: rgba(31, 41, 55, 0.95);
+      --font-family: 'Poppins', sans-serif;
+      --border-radius: 16px;
+      --transition: 0.3s ease;
+    }
+
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+      background-size: 400% 400%;
+      animation: bgGradient 30s ease infinite;
+      font-family: var(--font-family);
+      color: var(--color-text);
+    }
+
+    @keyframes bgGradient {
+      0%, 100% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--color-bg-overlay);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      user-select: none;
+      backdrop-filter: saturate(180%) blur(10px);
+    }
+
+    nav .logo {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--color-accent);
+      letter-spacing: 4px;
+      cursor: default;
+      position: relative;
+      transition: color var(--transition);
+      text-shadow: 0 0 6px var(--color-accent-light);
+    }
+    nav .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-accent-light), transparent);
+      animation: shine 3s linear infinite;
+      border-radius: 3px;
+      filter: drop-shadow(0 0 2px var(--color-accent-light));
+    }
+    @keyframes shine {
+      0% {transform: translateX(-100%);}
+      100% {transform: translateX(100%);}
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 3rem;
+    }
+
+    nav ul li a {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 0.25rem 0;
+      position: relative;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: var(--color-accent);
+      border-radius: 3px;
+      transition: width var(--transition), left var(--transition);
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: var(--color-accent);
+      outline: none;
+    }
+    nav ul li a:hover::after,
+    nav ul li a:focus::after {
+      width: 100%;
+      left: 0;
+      box-shadow: 0 0 10px var(--color-accent);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 6rem auto 4rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      animation: fadeInScale 1s ease forwards;
+    }
+
+    header h1 {
+        font-size: 3.6rem;
+        font-weight: 700;
+        background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.6rem; /* Reduced from 1rem */
+        text-shadow: 0 0 15px var(--color-accent-light);
+        user-select: text;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      user-select: text;
+      letter-spacing: 0.02em;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-bg-overlay);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.5);
+      transition: background-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+      user-select: none;
+      will-change: transform;
+    }
+    .btn:hover,
+    .btn:focus {
+      background: var(--color-secondary);
+      color: var(--color-text);
+      box-shadow: 0 14px 40px rgba(59, 130, 246, 0.7);
+      outline: none;
+      transform: scale(1.05);
+    }
+
+    section {
+      margin-top: 4rem;
+      background: var(--color-bg-card);
+      padding: 2.8rem 3rem;
+      border-radius: var(--border-radius);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+      text-align: left;
+      animation: fadeInUp 1s ease forwards;
+      user-select: text;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #d1d5db;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem; /* Reduced from 1.6rem */
+      color: var(--color-accent);
+      text-shadow: 0 0 10px var(--color-accent-light);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    section p,
+    section ul {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #d1d5db;
+    }
+
+   ul {
+  padding-left: 1.6rem;
+  list-style: none; /* disables default bullets */
+}
+
+ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  left: -0.5rem; /* moves bullet 0.3rem left */
+  padding-left: 1.4rem;
+}
+
+ul li::before {
+  content: '▹';
+  position: absolute;
+  left: -0.1rem; /* moves bullet 0.3rem left */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-right: 0.5rem;
+}
+
+
+
+
+    #contact a {
+      color: var(--color-accent);
+      text-decoration: underline;
+      transition: color var(--transition);
+      font-weight: 600;
+    }
+    #contact a:hover,
+    #contact a:focus {
+      color: var(--color-secondary);
+      outline: none;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+      background: var(--color-primary);
+      user-select: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      margin-top: 4rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links.active {
+      display: block;
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      right: 0;
+      background-color: var(--color-bg-overlay);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+      nav ul {
+        gap: 2rem;
+      }
+      header h1 {
+        font-size: 2.8rem;
+      }
+      section {
+        padding: 2rem 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem 1.2rem;
+      }
+      nav ul {
+        width: 100%;
+        justify-content: center;
+        gap: 1.2rem;
+        margin-top: 0.3rem;
+      }
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .container {
+        margin: 5rem auto 3rem;
+        padding: 1.5rem 1rem;
+      }
+      section {
+        max-width: 100%;
+        padding: 1.8rem 1.5rem;
+        border-radius: 12px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      
+      
+      
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" aria-label="Brand logo" onclick="return false;" style="cursor:pointer;">
+  M14R41
+</div>
+
+<style>
+  .logo:active{animation:glitch .3s ease-in-out}@keyframes glitch{0%,100%{text-shadow:2px 0 red,-2px 0 cyan}50%{text-shadow:-2px 0 red,2px 0 cyan}}
+</style>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger" onclick="toggleNav()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+<!-- Navigation Links -->
+<ul class="nav-links" role="navigation" aria-label="Primary Navigation" style="list-style: none; padding: 0; margin: 0;">
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="https://profile.m14r41.in" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Portfolio</a>
+  </li>
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="https://blogs.m14r41.in/" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Article</a>
+  </li>
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#offerings" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Offerings</a>
+  </li>
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#Certication" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Certication</a>
+  </li>
+
+  <!-- Contact with detailed submenu -->
+  <li class="has-submenu" onclick="toggleSubmenu(event)" onmouseover="showSubmenu(this)" onmouseout="hideSubmenu(this)" style="display: inline-block; position: relative; margin-right: 10px; cursor: pointer;">
+    <a href="#contact" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Contact</a>
+    <div class="submenu" style="display: none; position: absolute; top: 100%; left: 0; background: rgb(44, 43, 43); border: 1px solid #ccc; padding: 10px; z-index: 1000; width: fit-content;">
+      <p style="margin: 0 0 6px;"><a href="mailto:madhurendra011@gmail.com" style="color: white; text-decoration: none;">Email</a></p>
+      <p style="margin: 0 0 6px;"><a href="https://github.com/m14r41" style="color: white; text-decoration: none;">GitHub</a></p>
+      <p style="margin: 0 0 6px;"><a href="https://medium.com/@m14r41" style="color: white; text-decoration: none;">Blog</a></p>
+      <p style="margin: 0 0 6px;"><a href="https://www.linkedin.com/in/M14R41/" style="color: white; text-decoration: none;">LinkedIn</a></p>
+      <p style="margin: 0;"><a href="https://x.com/M14_R41" style="color: white; text-decoration: none;">X</a></p>
+    </div>
+  </li>
+
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#about" style="text-decoration: none; padding: 8px 12px; display: inline-block;">About</a>
+  </li>
+</ul>
+
+<script>
+  function toggleSubmenu(event) {
+    if (event.target.tagName.toLowerCase() === 'a') {
+      return; // allow normal link behavior
+    }
+    const submenu = event.currentTarget.querySelector('.submenu');
+    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function showSubmenu(el) {
+    const submenu = el.querySelector('.submenu');
+    submenu.style.display = 'block';
+  }
+
+  function hideSubmenu(el) {
+    const submenu = el.querySelector('.submenu');
+    submenu.style.display = 'none';
+  }
+
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.has-submenu').forEach(li => {
+      if (!li.contains(e.target)) {
+        const submenu = li.querySelector('.submenu');
+        if (submenu) submenu.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+
+
+
+
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <header>
+    <h1>Madhurendra Kumar</h1>
+    <p>Security Consultant || 50x CVE || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC || MCA || Offensive Security</p>
+    <a href="https://profile.m14r41.in" class="btn" target="_blank" rel="noopener noreferrer">View Portfolio</a>
+  </header>
+
+  <section id="about">
+    <h2>Who Am I </h2>
+
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.2s; color: hsl(0, 0%, 100%); font-size: 1.1em;">
+    Senior Security Consultant, Certified Red Team Professional (CRTP), and CEH Master with over 3 years of experience in penetration testing and client communication.
+</p><br>
+
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.6s; color: hsl(0, 0%, 100%); font-size: 1.1em;">
+    I hold a Master's degree in Computer Applications (MCA), which has provided me with a strong foundation in software development, programming, and cybersecurity principles.
+</p><br>
+
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 1s; color: hsl(0, 0%, 100%); font-size: 1.1em;">
+    I have over 50 CVEs published under my name and actively contribute to the cybersecurity community through open-source projects and technical blogs.
+</p><br>
+
+<style>
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+
+
+
+  </section>
+
+  <section id="offerings">
+    <h2>Security Solutions</h2>
+    <ul>
+<ul>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Perform Vulnerability Assessments</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Perform penetration tests on web applications.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Conduct penetration tests on APIs.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Source code review and analysis.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Mobile penetration testing (Android and iOS).</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Thick client penetration testing.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Conduct in-depth security research and document findings.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Collaborate with the application team.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Address vulnerabilities and provide remediation.</li>
+</ul>
+
+
+
+
+    </ul>
+    <p>
+        <a href="mailto:madhurendra011@gmail.com" class="btn" rel="noopener noreferrer" aria-label="Email Me for Penetration Testing Services"> Hire Me Now</a>
+    </p>
+  </section>
+
+    <section id="Certication">
+    <h2>Certification</h2>
+    <ul>
+      <li>CRTP (Certified Red Team Professional)</li>
+      <li>CEH Practical</li>
+      <li>CEH_V11</li>
+      <li>CEH Master</li>
+      <li>MCRTA</li>
+    </ul>
+
+  </section>
+
+<!-- Make sure to include Font Awesome in <head> if not already -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<section id="cont" style="max-width:900px; margin:60px auto 0 auto; padding:20px; font-family: Arial, sans-serif;">
+<h2 style="text-align:left; color:#d33; margin-bottom:20px; width:90%; display:block;">Get in Touch</h2>
+
+  <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+    <a href="mailto:madhurendra011@gmail.com" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fa fa-envelope" style="font-size:20px;"></i> Email
+    </a>
+
+    <a href="https://github.com/m14r41" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fab fa-github" style="font-size:20px;"></i> GitHub
+    </a>
+
+    <a href="https://twitter.com/M14_R41" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fab fa-twitter" style="font-size:20px;"></i> Twitter
+    </a>
+
+    <a href="https://www.linkedin.com/in/M14R41/" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fab fa-linkedin" style="font-size:20px;"></i> LinkedIn
+    </a>
+
+    <a href="https://medium.com/@m14r41" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fab fa-medium" style="font-size:20px;"></i> Blog
+    </a>
+
+    <a href="https://x.com/M14_R41" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
+       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
+      <i class="fab fa-x-twitter" style="font-size:20px;"></i> X (Twitter)
+    </a>
+  </div>
+</section>
+
+
+
+<style>
+    #contact {
+        text-align: left;
+        padding: 20px;
+    }
+    #contact h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    #contact p {
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+    .label {
+        display: inline-block;
+        width: 100px; /* Adjust as necessary for your layout */
+        font-weight: bold;
+    }
+    #contact a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+    #contact a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+
+</div>
+
+<footer>
+  &copy; 2025 MADHURENDRA || M14R41
+</footer>
+
+<script>
+  function toggleNav() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+  }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const listItems = document.querySelectorAll('ul li');
+    const options = {
+      threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          entry.target.style.transitionDelay = `${Array.from(listItems).indexOf(entry.target) * 0.1}s`; // faster stagger
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    listItems.forEach(li => observer.observe(li));
+  });
+  
+</script>
+
+</body>
+</html>
