@@ -363,13 +363,22 @@
       .nav-links.active {
         display: flex;
       }
+
+      
+      
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo" aria-label="Brand logo">M14R41</div>
+  <div class="logo" aria-label="Brand logo" onclick="return false;" style="cursor:pointer;">
+  M14R41
+</div>
+
+<style>
+  .logo:active{animation:glitch .3s ease-in-out}@keyframes glitch{0%,100%{text-shadow:2px 0 red,-2px 0 cyan}50%{text-shadow:-2px 0 red,2px 0 cyan}}
+</style>
 
   <!-- Hamburger Menu -->
   <div class="hamburger" onclick="toggleNav()">
@@ -398,7 +407,7 @@
   </header>
 
   <section id="about">
-    <h2>Who Am I</h2>
+    <h2>Who Am </h2>
     <p>Senior Security Consultant, Certified Red Team Professional (CRTP) and CEH Master with over 3 years of experience in Penetration Testing.</p><br>
 
     <p>My expertise includes Web, API, Mobile, SAST, and Thick Client penetration testing, along with vulnerability research and client communction.</p><br>
