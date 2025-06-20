@@ -209,24 +209,33 @@
       color: #d1d5db;
     }
 
-    ul {
-      padding-left: 1.6rem;
-    }
+   ul {
+  padding-left: 1.6rem;
+  list-style: none; /* disables default bullets */
+}
 
-    ul li {
-      margin-bottom: 1rem;
-      position: relative;
-      padding-left: 1.4rem;
-    }
-    ul li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--color-accent);
-      font-weight: 700;
-      font-size: 1.3rem;
-      line-height: 1;
-    }
+ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  left: -0.9rem; /* moves bullet 0.3rem left */
+  padding-left: 1.4rem;
+}
+
+ul li::before {
+  content: '▹';
+  position: absolute;
+  left: -0.1rem; /* moves bullet 0.3rem left */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-right: 0.5rem;
+}
+
+
+
 
     #contact a {
       color: var(--color-accent);
@@ -366,6 +375,7 @@
 
       
       
+      
     }
   </style>
 </head>
@@ -402,34 +412,55 @@
 <div class="container">
   <header>
     <h1>Madhurendra Kumar</h1>
-    <p>Security Consultant || 50x CVE || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC || Pentester || Offensive Security</p>
+    <p>Security Consultant || 50x CVE || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC || MCA || Offensive Security</p>
     <a href="https://profile.m14r41.in" class="btn" target="_blank" rel="noopener noreferrer">View Portfolio</a>
   </header>
 
   <section id="about">
-    <h2>Who Am </h2>
-    <p>Senior Security Consultant, Certified Red Team Professional (CRTP) and CEH Master with over 3 years of experience in Penetration Testing.</p><br>
+    <h2>Who Am I </h2>
 
-    <p>My expertise includes Web, API, Mobile, SAST, and Thick Client penetration testing, along with vulnerability research and client communction.</p><br>
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.2s; color: #ced1d3; font-size: 1.1em;">
+    Senior Security Consultant, Certified Red Team Professional (CRTP), and CEH Master with over 3 years of experience in penetration testing and client communication.
+</p><br>
 
-    <p>I have 50+ CVEs published under my name and actively contribute to the cybersecurity community through open-source projects and technical blogs.<br/></p><br>
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.6s; color: #ffffff; font-size: 1.1em;">
+    I hold a Master's degree in Computer Applications (MCA), which has provided me with a strong foundation in software development, programming, and cybersecurity principles.
+</p><br>
+
+<p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 1s; color: #dbc9b9; font-size: 1.1em;">
+    I have over 50 CVEs published under my name and actively contribute to the cybersecurity community through open-source projects and technical blogs.
+</p><br>
+
+<style>
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 
 
 
-    </p>
+
   </section>
 
   <section id="offerings">
-    <h2>What I Offer</h2>
+    <h2>Security Solutions Provided</h2>
     <ul>
-        <li>Perform Vulnerability Assessments</li>
-        <li>Perform penetration tests on web applications.</li>
-        <li>Conduct penetration tests on APIs.</li>
-        <li>Source code review and analysis.</li>
-        <li>Mobile penetration testing (Android and iOS).</li>
-        <li>Thick client penetration testing.</li>
-        <li>Conduct in-depth security research and document findings.</li>
-        <li>Collaborate with the application team to address vulnerabilities and provide remediation.</li>
+<ul>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Perform Vulnerability Assessments</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Perform penetration tests on web applications.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Conduct penetration tests on APIs.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Source code review and analysis.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Mobile penetration testing (Android and iOS).</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Thick client penetration testing.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Conduct in-depth security research and document findings.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Collaborate with the application team.</li>
+  <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Address vulnerabilities and provide remediation.</li>
+</ul>
+
+
 
 
     </ul>
@@ -491,7 +522,7 @@
 </div>
 
 <footer>
-  &copy; 2025 Madhurendra Kumar | M14r41
+  &copy; 2025 Madhurendra Kumar || M14r41
 </footer>
 
 <script>
@@ -499,6 +530,27 @@
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
   }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const listItems = document.querySelectorAll('ul li');
+    const options = {
+      threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          entry.target.style.transitionDelay = `${Array.from(listItems).indexOf(entry.target) * 0.1}s`; // faster stagger
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    listItems.forEach(li => observer.observe(li));
+  });
+  
 </script>
 
 </body>
