@@ -139,20 +139,62 @@
       animation: fadeInScale 1s ease forwards;
     }
 
-    header h1 {
-        font-size: 3.6rem;
-        font-weight: 700;
-        background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.6rem; /* Reduced from 1rem */
-        text-shadow: 0 0 15px var(--color-accent-light);
-        user-select: text;
-    }
+
+header h1 {
+    font-size: 3.6rem;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f53311;
+    background: none;
+    margin-bottom: 0.6rem;
+    user-select: text;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    /* Cleaner glow effect - less blur */
+    text-shadow:
+        0 0 1px #dd1607,
+        0 0 1px #f32d0a;
+
+    animation: subtleFlicker 10s infinite alternate;
+    position: relative;
+}
+
+/* Subtle flicker effect for hacker flair without overpowering */
+@keyframes subtleFlicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.95; }
+    100% { opacity: 1; }
+}
+
+/* Terminal-style blinking cursor */
+header h1::after {
+    content: '_';
+    animation: blink 1s step-start infinite;
+    margin-left: 4px;
+    color: #00ff00;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
     header p {
       font-size: 1.4rem;
-      color: #cbd5e1;
+      color: #d4d9df;
       margin-bottom: 2.5rem;
       max-width: 600px;
       margin-left: auto;
@@ -261,10 +303,10 @@ ul li::before {
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
-      color: #9ca3af;
+      color: #f7f7f7;
       background: var(--color-primary);
       user-select: none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(24, 23, 23, 0.1);
       margin-top: 4rem;
     }
 
@@ -397,6 +439,7 @@ ul li::before {
   .logo:active{animation:glitch .3s ease-in-out}@keyframes glitch{0%,100%{text-shadow:2px 0 red,-2px 0 cyan}50%{text-shadow:-2px 0 red,2px 0 cyan}}
 </style>
 
+
   <!-- Hamburger Menu -->
   <div class="hamburger" onclick="toggleNav()">
     <div></div>
@@ -406,29 +449,19 @@ ul li::before {
 
 <!-- Navigation Links -->
 <ul class="nav-links" role="navigation" aria-label="Primary Navigation" style="list-style: none; padding: 0; margin: 0;">
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
-    <a href="https://profile.m14r41.in" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Portfolio</a>
+ 
+    <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#offerings" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Solutions</a>
   </li>
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
-    <a href="https://blogs.m14r41.in/" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Article</a>
-  </li>
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
-    <a href="#offerings" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Offerings</a>
-  </li>
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <li style="display: inline-block; position: relative; margin-right: 10px;">
     <a href="#Certication" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Certication</a>
   </li>
-
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
-    <a href="#about" style="text-decoration: none; padding: 8px 12px; display: inline-block;">About</a>
+    <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="https://blogs.m14r41.in/" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Article</a>
   </li>
 
 
-  <li style="display: inline-block; position: relative; margin-right: 10px;">
-    <a href="#contact" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Contact</a>
-  </li>
 
-  
   <!-- Contact with detailed submenu -->
 
   <li class="has-submenu" onclick="toggleSubmenu(event)" onmouseover="showSubmenu(this)" onmouseout="hideSubmenu(this)" style="display: inline-block; position: relative; margin-right: 10px; cursor: pointer;">
@@ -440,6 +473,13 @@ ul li::before {
     <p style="margin: 0 0 6px;"><a href="https://github.com/m14r41/SemgrepAnalyzer" style="color: white; text-decoration: none;">SemgrepAnalyzer</a></p>
     <p style="margin: 0 0 6px;"><a href="https://github.com/m14r41/Clickjacking-Poc" style="color: white; text-decoration: none;">Clickjacking</a></p>
     <p style="margin: 0 0 6px;"><a href="https://github.com/m14r41/LinuxEnv" style="color: white; text-decoration: none;">LinuxEnv</a></p>
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#about" style="text-decoration: none; padding: 8px 12px; display: inline-block;">About</a>
+  </li>
+    
+  <li style="display: inline-block; position: relative; margin-right: 10px;">
+    <a href="#contact" style="text-decoration: none; padding: 8px 12px; display: inline-block;">Contact</a>
+  </li>
 
 
 
@@ -486,15 +526,15 @@ ul li::before {
 <div class="container">
   <header>
     <h1>Madhurendra Kumar</h1>
-    <p>Security Consultant || 50x CVE || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC || MCA || Offensive Security</p>
+    <p>Product Security Engineer || 50x CVE || eWPTXv3 || CRTP || CEH Master || MCRTA || NCIIPC Top 15 Researcher || VAPT & APPSEC </p>
     <a href="https://profile.m14r41.in" class="btn" target="_blank" rel="noopener noreferrer">View Portfolio</a>
   </header>
 
   <section id="about">
-    <h2>Who Am I </h2>
+    <h2>Who Am I ? </h2>
 
 <p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.2s; color: hsl(0, 0%, 100%); font-size: 1.1em;">
-    Senior Security Consultant, Certified Red Team Professional (CRTP), and CEH Master with over 3 years of experience in penetration testing and client communication.
+    Product Security Engineer, Certified Red Team Professional (CRTP), Web Application Penetration Tester eXtreme and CEH Master with over three years of experience in penetration testing and client communication.
 </p><br>
 
 <p style="opacity: 0; transform: translateY(20px); animation: fadeSlideUp 1s ease forwards; animation-delay: 0.6s; color: hsl(0, 0%, 100%); font-size: 1.1em;">
@@ -513,12 +553,7 @@ ul li::before {
     }
 }
 </style>
-
-
-
-
   </section>
-
   <section id="offerings">
     <h2>Security Solutions</h2>
     <ul>
@@ -533,10 +568,6 @@ ul li::before {
   <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Collaborate with the application team.</li>
   <li style="opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.3s ease;">Address vulnerabilities and provide remediation.</li>
 </ul>
-
-
-
-
     </ul>
     <p>
         <a href="mailto:madhurendra011@gmail.com" class="btn" rel="noopener noreferrer" aria-label="Email Me for Penetration Testing Services"> Hire Me!</a>
@@ -546,6 +577,7 @@ ul li::before {
     <section id="Certication">
     <h2>Certification</h2>
     <ul>
+      <li>eWPTXv3 (Web Application Penetration Tester eXtreme)</li>
       <li>CRTP (Certified Red Team Professional)</li>
       <li>CEH Practical</li>
       <li>CEH_V11</li>
@@ -574,13 +606,6 @@ ul li::before {
       <i class="fab fa-twitter" style="font-size:20px;"></i> Twitter
     </a>
 
- 
-
-    <a href="https://medium.com/@m14r41" target="_blank" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
-       onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
-      <i class="fab fa-medium" style="font-size:20px;"></i> Medium Blogs
-    </a>
-
     <a href="mailto:madhurendra011@gmail.com" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background-color:#d33; color:white; text-decoration:none; font-weight:600; font-size:16px; border-radius:6px; transition:background-color 0.3s ease;" 
        onmouseover="this.style.backgroundColor='#a22'" onmouseout="this.style.backgroundColor='#d33'">
       <i class="fa fa-envelope" style="font-size:20px;"></i> Email
@@ -588,35 +613,6 @@ ul li::before {
 
 
 </section>
-
-<style>
-    #contact {
-        text-align: left;
-        padding: 20px;
-    }
-    #contact h2 {
-        font-size: 2em;
-        margin-bottom: 20px;
-    }
-    #contact p {
-        font-size: 1.1em;
-        margin: 10px 0;
-    }
-    .label {
-        display: inline-block;
-        width: 100px; /* Adjust as necessary for your layout */
-        font-weight: bold;
-    }
-    #contact a {
-        text-decoration: none;
-        color: #007BFF;
-    }
-    #contact a:hover {
-        text-decoration: underline;
-    }
-</style>
-
-
 
 </div>
 
